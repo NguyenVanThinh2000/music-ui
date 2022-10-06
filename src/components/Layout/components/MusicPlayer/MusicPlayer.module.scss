@@ -1,0 +1,40 @@
+.wrapper {
+    height: var(--musicplayer-height);
+    background-color: var(--musicplayer-bg);
+    display: flex;
+    align-items: center;
+}
+
+// current song
+.current-song {
+    width: var(--sidebar-width);
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    cursor: pointer;
+    img {
+        height: 60px;
+        width: 60px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .info {
+    }
+    .name {
+        color: var(--text-bold-color);
+    }
+    .single {
+        color: var(--text-gray-color);
+        font-size: 1.4rem;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// player
+
+// actions
+.actions {
+    width: var(--sidebar-width);
+}

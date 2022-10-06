@@ -1,0 +1,64 @@
+.wrapper {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .buttons {
+        display: flex;
+
+        .btn {
+            display: flex;
+
+            .btn-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 40px;
+                width: 40px;
+                font-size: 1.8rem;
+                border-radius: 50rem;
+                margin: 0 10px;
+                cursor: pointer;
+                color: var(--text-gray-color);
+                transition: 0.2s linear;
+
+                &:hover {
+                    background-color: rgb(193, 193, 193);
+                }
+            }
+
+            .btn-circle {
+                border: 1px solid var(--text-bold-color);
+                height: 45px;
+                width: 45px;
+            }
+
+            .active {
+                color: white;
+            }
+        }
+    }
+
+    // timer
+    .time {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .current-time,
+        .total-time {
+            color: var(--text-gray-color);
+        }
+    }
+    .timeline {
+        width: 50%;
+        max-width: 700px;
+        display: flex;
+        align-items: center;
+    }
+}

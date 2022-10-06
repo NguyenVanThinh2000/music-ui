@@ -1,0 +1,106 @@
+.wrapper {
+    width: 16%;
+    margin-bottom: 30px;
+    .image {
+        position: relative;
+        width: 100%;
+        height: 170px;
+        margin-bottom: 8px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: 0.2s linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .btn-top {
+                position: absolute;
+                width: 100%;
+                top: 0;
+                display: flex;
+                justify-content: space-between;
+                color: var(--text-bold-color);
+                padding: 3% 6%;
+                .add-to-playLists {
+                    border-radius: 100%;
+                    border: 1px solid;
+                    height: 18px;
+                    width: 18px;
+                    text-align: center;
+                    line-height: 18px;
+                    cursor: pointer;
+                    margin-top: 2px;
+                    font-size: 11px;
+
+                    &:hover {
+                        color: white;
+                    }
+                }
+                .add-to-favoriteLists {
+                    cursor: pointer;
+                    &:hover {
+                        color: white;
+                    }
+                }
+                .active-heart {
+                    color: var(--heart-active-color) !important;
+                }
+                .active-add {
+                    background-color: #4cb6cb !important;
+                    color: black !important;
+                }
+            }
+
+            .btn-play {
+                color: var(--text-bold-color);
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                border-radius: 100%;
+                border: 1px solid;
+                padding-left: 3px;
+                cursor: pointer;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+
+        &:hover .overlay {
+            opacity: 1;
+        }
+    }
+
+    .song-name {
+        font-size: 15px;
+        color: var(--song-card-color);
+        cursor: pointer;
+        transition: 0.1s linear;
+        &:hover {
+            color: var(--song-card-color-hover);
+        }
+    }
+    .singer-name {
+        font-size: 14px;
+        color: var(--song-card-color-muted);
+        cursor: pointer;
+        transition: 0.1s linear;
+        &:hover {
+            color: var(--song-card-color-hover);
+        }
+    }
+}

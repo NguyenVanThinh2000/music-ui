@@ -1,0 +1,16 @@
+.wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+    }
+    .songs {
+        flex: 1;
+        display: flex;
+        gap: 5%;
+        flex-wrap: wrap;
+        margin: 20px 0;
+        overflow-y: scroll;
+    }
+}

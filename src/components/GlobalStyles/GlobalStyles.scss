@@ -1,0 +1,36 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+:root {
+    --sidebar-bg: #232c32;
+    --header-bg: white;
+    --musicplayer-bg: #5a6a7a;
+    --appcontent-bg: #f2f4f8;
+    --sidebar-width: 230px;
+    --header-height: 60px;
+    --musicplayer-height: 90px;
+    --sidebar-text-color: #8ca1af;
+    --text-bold-color: #c8d2d9;
+    --text-gray-color: #172b39;
+    --song-card-color: #545a5f;
+    --song-card-color-muted: #939aa0;
+    --song-card-color-hover: #303437;
+    --heart-active-color: #f05050;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+a {
+    text-decoration: none;
+}
