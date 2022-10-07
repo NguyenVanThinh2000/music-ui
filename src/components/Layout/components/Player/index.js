@@ -126,6 +126,7 @@ function Player() {
                 </div>
                 <div className={cx("timeline")}>
                     <input
+                        className={cx("input-range")}
                         type="range"
                         min="0"
                         max={currentSong.length}

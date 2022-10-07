@@ -1,6 +1,7 @@
 .wrapper {
     width: var(--sidebar-width);
     background-color: var(--sidebar-bg);
+    height: calc(100vh - var(--musicplayer-height));
 }
 .title {
     height: var(--header-height);

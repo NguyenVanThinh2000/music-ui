@@ -1,0 +1,17 @@
+.wrapper {
+    height: 100%;
+    .title {
+        padding: 10px;
+        border-bottom: 1px solid var(--song-card-color);
+        color: white;
+        font-size: 1.6rem;
+        text-align: center;
+        height: 45px;
+    }
+
+    .list {
+        padding: 10px 8px;
+        height: calc(100% - 45px);
+        overflow-y: scroll;
+    }
+}

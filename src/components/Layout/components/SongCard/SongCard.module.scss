@@ -1,4 +1,4 @@
-.wrapper {
+.wrapper-vertical {
     width: 16%;
     margin-bottom: 30px;
     .image {
@@ -102,5 +102,136 @@
         &:hover {
             color: var(--song-card-color-hover);
         }
+    }
+}
+
+.wrapper-horizontal {
+    height: 50px;
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:hover {
+        background-color: var(--song-card-color);
+
+        .overlay {
+            display: flex !important;
+        }
+    }
+    .left {
+        display: flex;
+        height: 100%;
+        gap: 10px;
+
+        .image {
+            height: 100%;
+            width: 38px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .overlay {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                align-items: center;
+                justify-content: center;
+                color: white;
+                cursor: pointer;
+            }
+        }
+
+        .info {
+            .song-name {
+                font-size: 1.4rem;
+                color: white;
+            }
+
+            .singer-name {
+                font-size: 1.3rem;
+                color: var(--sidebar-text-color);
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .added {
+        transform: rotate(45deg);
+    }
+}
+.active {
+    background-color: var(--musicplayer-bg);
+}
+.active-heart {
+    color: var(--heart-active-color) !important;
+}
+
+.icon-right {
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: var(--sidebar-text-color);
+    transition: 0.2s linear;
+}
+
+.non-style.active {
+    background-color: initial !important;
+}
+.non-style {
+    height: 100%;
+    padding: 0;
+
+    .image {
+        height: calc(var(--musicplayer-height) - 20px) !important;
+        width: calc(var(--musicplayer-height) - 20px) !important;
+    }
+    .image-spin {
+        border-radius: 100% !important;
+        animation: spin 3s linear infinite;
+    }
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .song-name {
+            font-size: 1.6rem !important;
+            color: var(--text-bold-color) !important;
+        }
+        .singer-name {
+            font-size: 1.5rem !important;
+            color: var(--text-gray-color) !important;
+        }
+    }
+    .icon-heart {
+        font-size: 1.8rem !important;
+        color: var(--text-gray-color);
+    }
+}
+
+// animation
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

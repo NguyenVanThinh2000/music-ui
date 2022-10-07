@@ -11,7 +11,9 @@ function ListSongs({ pageTitle, songs }) {
                 <h2 className={cx("title")}>{pageTitle}</h2>
                 <div className={cx("songs")}>
                     {songs.map((song, id) => {
-                        return <SongCard key={id} song={song} />;
+                        return (
+                            <SongCard key={id} song={song} isVertical={true} />
+                        );
                     })}
                 </div>
             </div>

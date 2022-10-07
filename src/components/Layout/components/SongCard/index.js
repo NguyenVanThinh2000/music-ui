@@ -1,18 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faPlay,
-    faHeart,
-    faAdd,
-    faCheck,
-} from "@fortawesome/free-solid-svg-icons";
-import classNames from "classnames/bind";
-import styles from "./SongCard.module.scss";
-import { SongContext } from "../../../../App";
-import { useContext, useState } from "react";
+import { SongContext, FavoriteContext } from "../../../../App";
+import { useContext, useEffect, useState } from "react";
+import VerticalCard from "./VerticalCard";
+import HorizontalCard from "./HorizontalCard";
 
-const cx = classNames.bind(styles);
-
-function SongCard({ song }) {
+function SongCard({ song, isVertical, isHorizontal, nonStyle }) {
     const [
         isPlaying,
         setIsPlaying,
@@ -22,9 +13,33 @@ function SongCard({ song }) {
         playLists,
         setPlayList,
     ] = useContext(SongContext);
-
+    const [favoriteSongs, setFavoriteSongs] = useContext(FavoriteContext);
+    const [activeBox, setActiveBox] = useState(false);
     const [inPlayList, setInPlayList] = useState(false);
+    const [inFavoriteList, setInFavoriteList] = useState(false);
+    useEffect(() => {
+        if (currentSong.id === song.id) {
+            setActiveBox(true);
+        } else {
+            setActiveBox(false);
+        }
+    }, [currentSong]);
+    useEffect(() => {
+        const foundPL = playLists.find((x) => x.id === song.id);
+        if (foundPL) {
+            setInPlayList(true);
+        } else {
+            setInPlayList(false);
+        }
+        const foundFL = favoriteSongs.find((x) => x.id === song.id);
+        if (foundFL) {
+            setInFavoriteList(true);
+        } else {
+            setInFavoriteList(false);
+        }
+    }, [playLists, favoriteSongs]);
 
+    // xử lý thêm vào danh sách phát
     const addToPlayList = () => {
         const checkSong = playLists.find((x) => x.id === song.id);
         if (!checkSong) {
@@ -50,44 +65,50 @@ function SongCard({ song }) {
         setInPlayList(!inPlayList);
     };
 
+    // xử lý thêm vào danh sách yêu thích
+    const handleAddToFavoriteList = () => {
+        if (inFavoriteList) {
+            let indexSong = favoriteSongs.findIndex((x) => x.id === song.id);
+            favoriteSongs.splice(indexSong, 1);
+            setFavoriteSongs([...favoriteSongs]);
+        } else {
+            const checkSong = favoriteSongs.find((x) => x.id === song.id);
+            if (!checkSong) {
+                setFavoriteSongs([...favoriteSongs, song]);
+            }
+        }
+        setInFavoriteList(!inFavoriteList);
+    };
     return (
-        <div className={cx("wrapper")}>
-            <div className={cx("image")}>
-                <img src={song.imageUrl} alt="" />
-                <div className={cx("overlay")}>
-                    <div className={cx("btn-top")}>
-                        <div
-                            className={cx(
-                                "add-to-playLists",
-                                inPlayList ? "active-add" : ""
-                            )}
-                            onClick={handleAddToPlayLists}
-                        >
-                            {inPlayList ? (
-                                <FontAwesomeIcon icon={faCheck} />
-                            ) : (
-                                <FontAwesomeIcon icon={faAdd} />
-                            )}
-                        </div>
-                        <div
-                            className={cx(
-                                "add-to-favoriteLists",
-                                "active-heart"
-                            )}
-                        >
-                            <FontAwesomeIcon icon={faHeart} />
-                        </div>
-                    </div>
-                    <div className={cx("btn-play")} onClick={handlePlay}>
-                        <FontAwesomeIcon icon={faPlay} />
-                    </div>
-                </div>
-            </div>
-            <div className={cx("info")}>
-                <p className={cx("song-name")}>{song.songName}</p>
-                <p className={cx("singer-name")}>{song.singerName}</p>
-            </div>
-        </div>
+        <>
+            {isVertical ? (
+                <VerticalCard
+                    song={song}
+                    inPlayList={inPlayList}
+                    inFavoriteList={inFavoriteList}
+                    handleAddToFavoriteList={handleAddToFavoriteList}
+                    handleAddToPlayLists={handleAddToPlayLists}
+                    handlePlay={handlePlay}
+                />
+            ) : (
+                ""
+            )}
+            {isHorizontal ? (
+                <HorizontalCard
+                    song={song}
+                    activeBox={activeBox}
+                    handlePlay={handlePlay}
+                    inPlayList={inPlayList}
+                    inFavoriteList={inFavoriteList}
+                    handleAddToPlayLists={handleAddToPlayLists}
+                    handleAddToFavoriteList={handleAddToFavoriteList}
+                    nonStyle={nonStyle}
+                    isPlaying={isPlaying}
+                />
+            ) : (
+                ""
+            )}
+        </>
     );
 }
 

@@ -13,7 +13,7 @@
     flex-direction: column;
 }
 .app-content {
-    flex: 1;
     background-color: var(--appcontent-bg);
     padding: 20px 30px;
+    height: calc(100vh - var(--header-height) - var(--musicplayer-height));
 }

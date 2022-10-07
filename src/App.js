@@ -8,6 +8,8 @@ import { stringtotime } from "./store";
 const cx = classNames.bind(styles);
 
 export const SongContext = createContext();
+export const FavoriteContext = createContext();
+export const SearchContext = createContext();
 
 function App() {
     const [isRepeat, setIsRepeat] = useState(true);
@@ -18,9 +20,28 @@ function App() {
         ...playLists[0],
         progress: 0,
     });
+    const [favoriteSongs, setFavoriteSongs] = useState([]);
+
+    const [search, setSearch] = useState({ keyWord: "", songs: [] });
+
+    useEffect(() => {
+        const favoriteSongs_LS = JSON.parse(
+            localStorage.getItem("favoriteSongs")
+        );
+        if (favoriteSongs_LS) {
+            setFavoriteSongs(favoriteSongs_LS);
+        }
+        const playLists_LS = JSON.parse(localStorage.getItem("playLists"));
+        if (playLists_LS) {
+            setPlayList(playLists_LS);
+        }
+    }, []);
+    useEffect(() => {
+        localStorage.setItem("favoriteSongs", JSON.stringify(favoriteSongs));
+        localStorage.setItem("playLists", JSON.stringify(playLists));
+    }, [favoriteSongs, playLists]);
 
     const audioElem = useRef();
-
     const onPlaying = () => {
         const ct = audioElem.current.currentTime;
         setCurrentSong({
@@ -83,34 +104,38 @@ function App() {
                 setIsRepeat,
             ]}
         >
-            <Router>
-                <div className="App">
-                    <div className={cx("app-wrapper")}>
-                        <Routes>
-                            {publicRoutes.map((route, index) => {
-                                const Page = route.component;
-                                let Layout = DefaultLayout;
-                                if (route.layout) {
-                                    Layout = route.layout;
-                                } else if (route.layout === null) {
-                                    Layout = Fragment;
-                                }
-                                return (
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        element={
-                                            <Layout>
-                                                <Page />
-                                            </Layout>
+            <FavoriteContext.Provider value={[favoriteSongs, setFavoriteSongs]}>
+                <SearchContext.Provider value={[search, setSearch]}>
+                    <Router>
+                        <div className="App">
+                            <div className={cx("app-wrapper")}>
+                                <Routes>
+                                    {publicRoutes.map((route, index) => {
+                                        const Page = route.component;
+                                        let Layout = DefaultLayout;
+                                        if (route.layout) {
+                                            Layout = route.layout;
+                                        } else if (route.layout === null) {
+                                            Layout = Fragment;
                                         }
-                                    />
-                                );
-                            })}
-                        </Routes>
-                    </div>
-                </div>
-            </Router>
+                                        return (
+                                            <Route
+                                                key={index}
+                                                path={route.path}
+                                                element={
+                                                    <Layout>
+                                                        <Page />
+                                                    </Layout>
+                                                }
+                                            />
+                                        );
+                                    })}
+                                </Routes>
+                            </div>
+                        </div>
+                    </Router>
+                </SearchContext.Provider>
+            </FavoriteContext.Provider>
             <audio
                 src={currentSong.audioUrl}
                 ref={audioElem}
