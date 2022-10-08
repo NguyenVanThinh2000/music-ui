@@ -48,7 +48,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10px;
 
         .current-time,
         .total-time {
@@ -60,5 +59,6 @@
         max-width: 700px;
         display: flex;
         align-items: center;
+        margin: 0 10px;
     }
 }

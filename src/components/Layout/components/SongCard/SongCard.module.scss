@@ -1,5 +1,6 @@
 .wrapper-vertical {
     width: 16%;
+    margin: 0 2%;
     margin-bottom: 30px;
     .image {
         position: relative;
@@ -122,14 +123,13 @@
     .left {
         display: flex;
         height: 100%;
-        gap: 10px;
-
         .image {
             height: 100%;
             width: 38px;
             border-radius: 4px;
             overflow: hidden;
             position: relative;
+            margin-right: 10px;
 
             img {
                 height: 100%;
@@ -171,7 +171,6 @@
     .right {
         display: flex;
         align-items: center;
-        gap: 10px;
     }
     .added {
         transform: rotate(45deg);
@@ -189,6 +188,7 @@
     font-size: 1.6rem;
     color: var(--sidebar-text-color);
     transition: 0.2s linear;
+    margin: 0 5px;
 }
 
 .non-style.active {

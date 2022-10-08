@@ -14,7 +14,7 @@ function NewSong() {
                 console.log(error);
             });
     }, []);
-    return <ListSongs pageTitle="Bài hát mới nhất" songs={newSongs} />;
+    return <ListSongs pageTitle="Bài Hát Mới Nhất" songs={newSongs} />;
 }
 
 export default NewSong;

@@ -7,9 +7,11 @@
     }
     .songs {
         display: flex;
-        gap: 5%;
         flex-wrap: wrap;
         margin: 20px 0;
         overflow-y: scroll;
+        &:nth-child(1) {
+            margin-left: 5%;
+        }
     }
 }
