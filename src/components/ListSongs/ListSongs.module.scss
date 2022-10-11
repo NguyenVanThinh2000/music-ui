@@ -3,15 +3,55 @@
     display: flex;
     flex-direction: column;
 
-    .title {
-    }
     .songs {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 20px 0;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 20px;
         overflow-y: scroll;
-        &:nth-child(1) {
-            margin-left: 5%;
+        margin-top: 10px;
+    }
+}
+
+// responsive
+@media only screen and (min-width: 1400px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
+}
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}
+@media only screen and (min-width: 876px) and (max-width: 959px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+@media only screen and (min-width: 540px) and (max-width: 875px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+@media only screen and (max-width: 539px) {
+    .wrapper {
+        .songs {
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }
