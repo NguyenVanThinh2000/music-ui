@@ -2,7 +2,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faMagnifyingGlass,
-    faCircleXmark,
+    // faCircleXmark,
     faArrowUpFromBracket,
     faGear,
 } from "@fortawesome/free-solid-svg-icons";
@@ -45,6 +45,7 @@ function Header() {
             handleSearch();
         }
     };
+
     return (
         <header className={cx("wrapper")}>
             <div className={cx("search")}>

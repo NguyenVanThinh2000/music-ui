@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import classNames from "classnames/bind";
 import styles from "./PlayList.module.scss";
 
@@ -17,7 +17,6 @@ function PlayList() {
         playLists,
         setPlayList,
     ] = useContext(SongContext);
-
     return (
         <div className={cx("wrapper")}>
             <div className={cx("title")}>Danh sách phát</div>
@@ -30,4 +29,4 @@ function PlayList() {
     );
 }
 
-export default PlayList;
+export default memo(PlayList);

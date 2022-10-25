@@ -23,4 +23,4 @@ function DefaultLayout({ children }) {
     );
 }
 
-export default memo(DefaultLayout);
+export default DefaultLayout;

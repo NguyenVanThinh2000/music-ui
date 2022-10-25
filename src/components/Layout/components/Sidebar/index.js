@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Sidebar.module.scss";
+import { memo } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -48,4 +49,4 @@ function Sidebar() {
     );
 }
 
-export default Sidebar;
+export default memo(Sidebar);
