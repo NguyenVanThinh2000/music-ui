@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 import styles from "./SongCard.module.scss";
-import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 

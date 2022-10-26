@@ -3,7 +3,6 @@ import styles from "./DefaultLayout.module.scss";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import { memo } from "react";
 import MusicPlayer from "../components/MusicPlayer";
 
 const cx = classNames.bind(styles);

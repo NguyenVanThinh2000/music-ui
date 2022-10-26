@@ -1,27 +1,20 @@
-import { memo, useContext } from "react";
+import { memo } from "react";
 import classNames from "classnames/bind";
 import styles from "./PlayList.module.scss";
 
-import { SongContext } from "../../App";
 import SongCard from "../Layout/components/SongCard";
+import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
 function PlayList() {
-    const [
-        isPlaying,
-        setIsPlaying,
-        currentSong,
-        setCurrentSong,
-        audioElem,
-        playLists,
-        setPlayList,
-    ] = useContext(SongContext);
+    const songs = useSelector((state) => state.songs.list);
+    const playList = songs.filter((song) => song.isPlayList === true);
     return (
         <div className={cx("wrapper")}>
             <div className={cx("title")}>Danh sách phát</div>
             <div className={cx("list")}>
-                {playLists.map((song, id) => (
+                {playList.map((song, id) => (
                     <SongCard key={id} song={song} isHorizontal={true} />
                 ))}
             </div>

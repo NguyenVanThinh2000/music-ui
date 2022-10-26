@@ -12,6 +12,7 @@ import styles from "./Player.module.scss";
 import { useContext } from "react";
 import { SongContext } from "../../../../App";
 import { stringtotime } from "../../../../store";
+import { useSelector } from "react-redux";
 const cx = className.bind(styles);
 
 function Player() {
@@ -21,13 +22,13 @@ function Player() {
         currentSong,
         setCurrentSong,
         audioElem,
-        playLists,
-        setPlayList,
         isShuffle,
         setIsShuffle,
         isRepeat,
         setIsRepeat,
     ] = useContext(SongContext);
+    const songs = useSelector((state) => state.songs.list);
+    const playLists = songs.filter((song) => song.isPlayList === true);
     const playPause = () => {
         setIsPlaying(!isPlaying);
     };

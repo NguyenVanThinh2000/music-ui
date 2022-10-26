@@ -1,22 +1,29 @@
-import { SongContext, FavoriteContext } from "../../../../App";
+import { SongContext } from "../../../../App";
 import { useContext, useEffect, useState } from "react";
 import VerticalCard from "./VerticalCard";
 import HorizontalCard from "./HorizontalCard";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    addFS,
+    addPL,
+    removeFS,
+    removePL,
+} from "../../../../store/actions/songs";
 
 function SongCard({ song, isVertical, isHorizontal, nonStyle }) {
-    const [
-        isPlaying,
-        setIsPlaying,
-        currentSong,
-        setCurrentSong,
-        audioElem,
-        playLists,
-        setPlayList,
-    ] = useContext(SongContext);
-    const [favoriteSongs, setFavoriteSongs] = useContext(FavoriteContext);
+    const [isPlaying, setIsPlaying, currentSong, setCurrentSong, audioElem] =
+        useContext(SongContext);
+
     const [activeBox, setActiveBox] = useState(false);
     const [inPlayList, setInPlayList] = useState(false);
     const [inFavoriteList, setInFavoriteList] = useState(false);
+
+    // redux playlist
+    const songs = useSelector((state) => state.songs.list);
+
+    // redux dispatch
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (currentSong.id === song.id) {
             setActiveBox(true);
@@ -24,28 +31,27 @@ function SongCard({ song, isVertical, isHorizontal, nonStyle }) {
             setActiveBox(false);
         }
     }, [currentSong]);
+
     useEffect(() => {
-        const foundPL = playLists.find((x) => x.id === song.id);
-        if (foundPL) {
-            setInPlayList(true);
+        const foundSong = songs.find((x) => x.id === song.id);
+
+        if (foundSong) {
+            if (foundSong.isPlayList) {
+                setInPlayList(true);
+            } else {
+                setInPlayList(false);
+            }
+            if (foundSong.isFavoriteSong) {
+                setInFavoriteList(true);
+            } else {
+                setInFavoriteList(false);
+            }
         } else {
             setInPlayList(false);
-        }
-        const foundFL = favoriteSongs.find((x) => x.id === song.id);
-        if (foundFL) {
-            setInFavoriteList(true);
-        } else {
             setInFavoriteList(false);
         }
-    }, [playLists, favoriteSongs]);
+    }, [songs]);
 
-    // xử lý thêm vào danh sách phát
-    const addToPlayList = () => {
-        const checkSong = playLists.find((x) => x.id === song.id);
-        if (!checkSong) {
-            setPlayList([...playLists, song]);
-        }
-    };
     const handlePlay = () => {
         addToPlayList();
         setInPlayList(true);
@@ -54,11 +60,21 @@ function SongCard({ song, isVertical, isHorizontal, nonStyle }) {
         audioElem.current.currentTime = 0;
     };
 
+    // xử lý thêm vào danh sách phát
+    const addToPlayList = () => {
+        const newSong = {
+            ...song,
+            isPlayList: true,
+            isFavoriteSong: false,
+        };
+        const action = addPL(newSong);
+        dispatch(action);
+    };
+
     const handleAddToPlayLists = () => {
         if (inPlayList) {
-            let indexSong = playLists.findIndex((x) => x.id === song.id);
-            playLists.splice(indexSong, 1);
-            setPlayList([...playLists]);
+            const action = removePL(song);
+            dispatch(action);
         } else {
             addToPlayList();
         }
@@ -68,14 +84,16 @@ function SongCard({ song, isVertical, isHorizontal, nonStyle }) {
     // xử lý thêm vào danh sách yêu thích
     const handleAddToFavoriteList = () => {
         if (inFavoriteList) {
-            let indexSong = favoriteSongs.findIndex((x) => x.id === song.id);
-            favoriteSongs.splice(indexSong, 1);
-            setFavoriteSongs([...favoriteSongs]);
+            const action = removeFS(song);
+            dispatch(action);
         } else {
-            const checkSong = favoriteSongs.find((x) => x.id === song.id);
-            if (!checkSong) {
-                setFavoriteSongs([...favoriteSongs, song]);
-            }
+            const newSong = {
+                ...song,
+                isPlayList: false,
+                isFavoriteSong: true,
+            };
+            const action = addFS(newSong);
+            dispatch(action);
         }
         setInFavoriteList(!inFavoriteList);
     };

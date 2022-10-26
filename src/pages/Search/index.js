@@ -1,16 +1,17 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import ListSongs from "../../components/ListSongs";
-import { SearchContext } from "../../App";
 function Search() {
-    const [search] = useContext(SearchContext);
+    const searchList = useSelector((state) => state.search.list);
+    const searchKeyword = useSelector((state) => state.search.keyWord);
+
     return (
         <ListSongs
             pageTitle={
-                search.songs.length > 0
-                    ? `Kết quả tìm kiếm của "${search.keyWord}"`
-                    : `Không có kết quả phù hợp với "${search.keyWord}"`
+                searchList.length > 0
+                    ? `Kết quả tìm kiếm của "${searchKeyword}"`
+                    : `Không có kết quả phù hợp với "${searchKeyword}"`
             }
-            songs={search.songs}
+            songs={searchList}
         />
     );
 }

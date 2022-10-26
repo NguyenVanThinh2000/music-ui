@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faPlay, faAdd } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";

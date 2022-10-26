@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,14 +10,16 @@ import {
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../../../App";
+import { searched } from "../../../../store/actions/search";
 
 const cx = classNames.bind(styles);
 
 function Header() {
-    const [search, setSearch] = useContext(SearchContext);
+    // search redux state
+    const dispatch = useDispatch();
+
     const [keyWord, setKeyWord] = useState("");
 
     const navigate = useNavigate();
@@ -26,14 +29,19 @@ function Header() {
         setKeyWord(value);
     };
     const handleSearch = () => {
-        if (keyWord == "") return;
+        if (keyWord === "") return;
         axios
             .get(process.env.REACT_APP_API_URL + "search", {
                 params: { keyWord: keyWord },
             })
             .then(function (response) {
-                setSearch({ keyWord: keyWord, songs: response.data });
                 setKeyWord("");
+                const newSearchState = {
+                    keyWord: keyWord,
+                    list: response.data,
+                };
+                const action = searched(newSearchState);
+                dispatch(action);
             })
             .catch(function (error) {
                 console.log(error);
